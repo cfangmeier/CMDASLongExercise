@@ -17,8 +17,8 @@
  */
 int electronSelection(){
     int selection = -1;
-    cout << "====================" << endl;
-    cout << "\n\nElectrons in event: " << nEle << endl;
+//    cout << "====================" << endl;
+//    cout << "\n\nElectrons in event: " << nEle << endl;
     for(int iele=0; iele<nEle; iele++){
         //Trigger cuts
         bool passTrigger =((HLTEleMuX >> 6 & 1) == 1  &&  isData ) ||
@@ -41,23 +41,23 @@ int electronSelection(){
             eleMVAId= true;
         else
             eleMVAId= false; 
-        bool passCuts = elePt->at(iele)       > 15    &&
-            eleEta->at(iele)      > 2.4   && 
-            isoEle                < 0.30  &&
-            fabs(eleD0->at(iele)) < 0.045 &&
-            fabs(eleDz->at(iele)) < 0.200;
-        cout << "Electron info:" << endl;
-        cout << "isoEle:" << isoEle << endl;
-        cout << "eleMVAId:" << eleMVAId << endl;
-        cout << "passTrigger:" << passTrigger << endl;
-        cout << "passCuts:" << passCuts << endl;
+        bool passCuts = elePt->at(iele) > 15    &&
+            fabs(eleEta->at(iele))      < 2.4   && 
+            isoEle                      < 0.30  &&
+            fabs(eleD0->at(iele))       < 0.045 &&
+            fabs(eleDz->at(iele))       < 0.200;
+//        cout << "Electron info:" << endl;
+//        cout << "isoEle:" << isoEle << endl;
+//        cout << "eleMVAId:" << eleMVAId << endl;
+//        cout << "passTrigger:" << passTrigger << endl;
+//        cout << "passCuts:" << passCuts << endl;
 
         if(passTrigger && eleMVAId && passCuts){
             if(selection == -1){
-                cout <<"found first electron" << endl;
+ //               cout <<"found first electron" << endl;
                 selection = iele; //Finds first electron
             } else{
-                cout << "found second electron" << endl;
+  //              cout << "found second electron" << endl;
                 selection == -1; //Finds second electron, so fail!
                 break;
             }
@@ -117,7 +117,6 @@ int main(int argc, char** argv) {
     Int_t nentries_wtn = (Int_t) Run_Tree->GetEntries();
     cout << "nentries_wtn====" << nentries_wtn << "\n";
     for (Int_t i = 0; i < nentries_wtn; i++) {
-        if(i > 3000) break;
         Run_Tree->GetEntry(i);
 
         if (i % 1000 == 0){
@@ -127,6 +126,7 @@ int main(int argc, char** argv) {
         int eleI = electronSelection();
         int tauI = tauIsoID();
         if(tauI == -1) continue;
+        if(eleI == -1) continue;
 
         //visibleMassSS->Fill(); 
         tauPt_h->Fill(tauPt->at(tauI));       
