@@ -63,6 +63,29 @@ int electronSelection(){
     return selection;
 }
 
+int tauIsoID()
+{
+	int idx = -1;
+	float min_iso = 999.0;
+	for(int itau = 0; itau < nTau; itau++)
+	{
+		bool TauPtCut = tauPt->at(itau) > 20  && fabs(tauEta->at(itau)) < 2.3 ;
+		bool TauPreSelection = tauByLooseMuonRejection3->at(itau) > 0;
+		//TauPreSelection = TauPreSelection && fabs(tauZImpact->at(itau)) < 0.2;
+		TauPreSelection =  TauPreSelection && tauByMVA5TightElectronRejection->at(itau) > 0;
+		TauPreSelection =  TauPreSelection && fabs(tauDxy->at(itau)) < 0.05 ;
+		if(!(TauPtCut && TauPreSelection)) continue;
+		bool iso_pass = tauByLooseCombinedIsolationDeltaBetaCorr3Hits->at(itau);
+		float iso = tauCombinedIsolationDeltaBetaCorrRaw3Hits->at(itau);
+		if(iso_pass && min_iso > iso)
+		{
+			min_iso = iso;
+			idx = itau;
+		}
+
+	}
+	return idx;
+}
 
 int main(int argc, char** argv) {
     using namespace std;
@@ -80,6 +103,10 @@ int main(int argc, char** argv) {
     //add the histrograms of muon and tau visible mass (both for opposite sign and same sign pair )
     TH1F * visibleMassOS = new TH1F ("visibleMassOS","visibleMassOS", 300, 0, 300);
     TH1F * visibleMassSS = new TH1F ("visibleMassSS","visibleMassSS", 300, 0, 300);
+	TH1F * tauPt_h = new TH1F ("tauPt_h","tauPt_h", 300, 0, 300);
+	TH1F * tauEta_h = new TH1F ("tauEta_h","tauEta_h", 100, -2.5, 2.5);
+	TH1F * tauZI_h = new TH1F ("tauZI_h","tauZI_h", 200, -100.0, 100.0);
+	TH1F * NPV_h = new TH1F ("NPV_h","NPV_h", 50, 0, 50);
     
     TTree *Run_Tree = (TTree*) myFile->Get("EventTree"); //Associate branches w/ predeclared variables
     associateTree(Run_Tree);
@@ -94,11 +121,15 @@ int main(int argc, char** argv) {
             fprintf(stdout, "\r  Processed events: %8d of %8d ", i, nentries_wtn);
             fflush(stdout);
         }
-        int selected_electron = electronSelection();
-        if(selected_electron != -1){
-            fprintf(stdout, "electron index: %d\n", selected_electron);
-        }
-        //Tau Loop
+        int eleI = electronSelection();
+		int tauI = tauIsoID();
+		if(tauI == -1) continue;
+
+		visibleMassSS->Fill(); 
+		tauPt_h->Fill(tauPt->at(tauI));       
+		tauEta_h->Fill(tauEta->at(tauI));      
+		tauZI_h->Fill(tauZImpact->at(tauI));       
+		NPV_h->Fill(nVtx); 	      
 
     }
 
