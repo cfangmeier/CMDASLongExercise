@@ -111,6 +111,13 @@ int main(int argc, char** argv) {
     TH1F * tauZI_h = new TH1F ("tauZI_h","tauZI_h", 200, -100.0, 100.0);
     TH1F * NPV_h = new TH1F ("NPV_h","NPV_h", 50, 0, 50);
 
+    TFile * PUData= new TFile("Data_Pileup_2015D_1p56fb.root");
+    TH1F * HistoPUData= (TH1F *) PUData->Get("pileup");
+
+
+    TFile * PUMC= new TFile("MC_Spring15_PU25_Startup.root");
+    TH1F * HistoPUMC= (TH1F *) PUMC->Get("pileup");
+
     TTree *Run_Tree = (TTree*) myFile->Get("EventTree"); //Associate branches w/ predeclared variables
     associateTree(Run_Tree);
     cout.setf(ios::fixed, ios::floatfield);
@@ -124,9 +131,18 @@ int main(int argc, char** argv) {
             fprintf(stdout, "\r  Processed events: %8d of %8d ", i, nentries_wtn);
             fflush(stdout);
         }
+
+        float PUWeight = 1;
+        int puNUmmc=int(puTrue->at(0)*10);
+        int puNUmdata=int(puTrue->at(0)*10);
+        float PUMC_=HistoPUMC->GetBinContent(puNUmmc+1);
+        float PUData_=HistoPUData->GetBinContent(puNUmdata+1);
+        PUWeight= PUData_/PUMC_;
+
         int eleI = electronSelection();
         int tauI = tauIsoID();
         if(tauI == -1) continue;
+        if(eleI == -1) continue;
 
         //visibleMassSS->Fill(); 
         tauPt_h->Fill(tauPt->at(tauI));       

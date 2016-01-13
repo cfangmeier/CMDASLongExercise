@@ -60,15 +60,3 @@ float weightCalc(TH1F *Histo,std::string outputName) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
