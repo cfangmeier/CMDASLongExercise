@@ -123,6 +123,16 @@ int main(int argc, char** argv) {
     cout.setf(ios::fixed, ios::floatfield);
     Int_t nentries_wtn = (Int_t) Run_Tree->GetEntries();
     cout << "nentries_wtn====" << nentries_wtn << "\n";
+    float  DYjet_CS = 6024.2;
+    float  Wjet_CS   = 61526;
+    float  TTjet_CS = 831.76;
+    float  lumi    = 1560;
+    float  DYjet = 9.501e11;
+    float  Wjet  = 3.782e12; 
+    float  TTJet = 88873000960;
+    float DYjet_W = lumi*DYjet_CS/DYjet;
+    float Wjets_W = lumi*Wjet_CS/Wjet;
+    float TTjets_W = lumi*TTjet_CS/TTJet;
     for (Int_t i = 0; i < nentries_wtn; i++) {
 //        if(i > 5000) break;
         Run_Tree->GetEntry(i);
