@@ -118,21 +118,15 @@ int main(int argc, char** argv) {
     TFile * PUMC= new TFile("MC_Spring15_PU25_Startup.root");
     TH1F * HistoPUMC= (TH1F *) PUMC->Get("pileup");
 
+    float lumiW = weightCalc(HistoTot,out);
+    if(lumiW == 1) genWeight = 1.0;
+
     TTree *Run_Tree = (TTree*) myFile->Get("EventTree"); //Associate branches w/ predeclared variables
     associateTree(Run_Tree);
     cout.setf(ios::fixed, ios::floatfield);
     Int_t nentries_wtn = (Int_t) Run_Tree->GetEntries();
     cout << "nentries_wtn====" << nentries_wtn << "\n";
-    float  DYjet_CS = 6024.2;
-    float  Wjet_CS   = 61526;
-    float  TTjet_CS = 831.76;
-    float  lumi    = 1560;
-    float  DYjet = 9.501e11;
-    float  Wjet  = 3.782e12; 
-    float  TTJet = 88873000960;
-    float DYjet_W = lumi*DYjet_CS/DYjet;
-    float Wjets_W = lumi*Wjet_CS/Wjet;
-    float TTjets_W = lumi*TTjet_CS/TTJet;
+
     for (Int_t i = 0; i < nentries_wtn; i++) {
 //        if(i > 5000) break;
         Run_Tree->GetEntry(i);
@@ -161,11 +155,11 @@ int main(int argc, char** argv) {
 
 
         if(tauCharge->at(tauI)*eleCharge->at(eleI) < 0){
-            visibleMassOS->Fill((ele4Vector+tau4Vector).M()); 
-            tauPt_h->Fill(tauPt->at(tauI));       
-            tauEta_h->Fill(tauEta->at(tauI));      
-            tauZI_h->Fill(tauZImpact->at(tauI));       
-            NPV_h->Fill(nVtx); 	      
+            visibleMassOS->Fill((ele4Vector+tau4Vector).M(),lumiW*PUWeight*genWeight); 
+            tauPt_h->Fill(tauPt->at(tauI),lumiW*PUWeight*genWeight);       
+            tauEta_h->Fill(tauEta->at(tauI),lumiW*PUWeight*genWeight);      
+            tauZI_h->Fill(tauZImpact->at(tauI),lumiW*PUWeight*genWeight);       
+            NPV_h->Fill(nVtx,lumiW*PUWeight*genWeight); 	      
         }else{
             visibleMassSS->Fill((ele4Vector+tau4Vector).M()); 
         }

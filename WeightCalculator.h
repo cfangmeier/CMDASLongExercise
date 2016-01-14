@@ -24,7 +24,6 @@ float XSection(std::string OutName) {
     if (OutName.compare("WJets") == 0) return 61526;
     else if (OutName.compare("DYJetsToLL") == 0) return 6025.2;
     else if (OutName.compare("TTJets") == 0) return 831.76 ;
-    
     else if (OutName.compare("WW") == 0) return 309.7;
     else if (OutName.compare("WZ") == 0) return 30400;
     else if (OutName.compare("ZZ") == 0) return 5400;
@@ -37,7 +36,7 @@ float weightCalc(TH1F *Histo,std::string outputName) {
 //    cout<< "outputName is "<<outputName << "  and histoname is " <<Histo->GetName()<<  " Histo->GetBinContent(1)="<<Histo->GetBinContent(1)<< " XSection(wjet)=" <<XSection("WJets")<<"\n";
     
 //    float luminosity=1264-55;
-        float luminosity=1560;
+    float luminosity=1560;
     
     size_t isSingleMu = outputName.find("SingleMu");
     size_t isSingleEle = outputName.find("SingleEle");
