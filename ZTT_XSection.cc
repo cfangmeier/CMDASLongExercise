@@ -78,6 +78,7 @@ int main(int argc, char** argv) {
                 elePhi->at(eleI), eleEn->at(eleI));
         tau4Vector.SetPtEtaPhiE(tauPt->at(tauI), tauEta->at(tauI),
                 tauPhi->at(tauI), tauEnergy->at(tauI));
+        float MT = TMass_F(ele4Vector.Pt(),ele4Vector.Px(),ele4Vector.Py(),pfMET,pfMETPhi); 
 
         
 
