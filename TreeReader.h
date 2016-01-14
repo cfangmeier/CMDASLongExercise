@@ -51,42 +51,9 @@ ULong64_t       HLTJet;
 ULong64_t       HLTEleMuXIsPrescaled;
 ULong64_t       HLTPhoIsPrescaled;
 ULong64_t       HLTJetIsPrescaled;
-vector<float>   *pdf;
-Float_t         pthat;
-Float_t         processID;
-Float_t         genWeight;
-Int_t           nPUInfo;
-vector<int>     *nPU;
-vector<int>     *puBX;
-vector<float>   *puTrue;
-Int_t           nMC;
-vector<int>     *mcPID;
-vector<float>   *mcVtx;
-vector<float>   *mcVty;
-vector<float>   *mcVtz;
-vector<float>   *mcPt;
-vector<float>   *mcMass;
-vector<float>   *mcEta;
-vector<float>   *mcPhi;
-vector<float>   *mcE;
-vector<float>   *mcEt;
-vector<int>     *mcGMomPID;
-vector<int>     *mcMomPID;
-vector<float>   *mcMomPt;
-vector<float>   *mcMomMass;
-vector<float>   *mcMomEta;
-vector<float>   *mcMomPhi;
-vector<int>     *mcIndex;
-vector<unsigned short> *mcStatusFlag;
-vector<int>     *mcParentage;
-vector<int>     *mcStatus;
-vector<float>   *mcCalIsoDR03;
-vector<float>   *mcTrkIsoDR03;
-vector<float>   *mcCalIsoDR04;
-vector<float>   *mcTrkIsoDR04;
+Float_t         genWeight;  //MC Only!
+vector<float>   *puTrue;    //MC Only!
 Int_t           metFilters;
-Float_t         genMET;
-Float_t         genMETPhi;
 Float_t         pfMET;
 Float_t         pfMETPhi;
 Float_t         pfMETsumEt;
@@ -362,18 +329,6 @@ vector<float>   *jetArea;
 vector<float>   *jetpfCombinedInclusiveSecondaryVertexV2BJetTags;
 vector<float>   *jetJetProbabilityBJetTags;
 vector<float>   *jetpfCombinedMVABJetTags;
-vector<int>     *jetPartonID;
-vector<int>     *jetGenJetIndex;
-vector<float>   *jetGenJetEn;
-vector<float>   *jetGenJetPt;
-vector<float>   *jetGenJetEta;
-vector<float>   *jetGenJetPhi;
-vector<int>     *jetGenPartonID;
-vector<float>   *jetGenEn;
-vector<float>   *jetGenPt;
-vector<float>   *jetGenEta;
-vector<float>   *jetGenPhi;
-vector<int>     *jetGenPartonMomID;
 vector<bool>    *jetPFLooseId;
 vector<float>   *jetPUidFullDiscriminant;
 vector<float>   *jetJECUnc;
@@ -399,18 +354,6 @@ vector<bool>    *AK8JetPFLooseId;
 vector<float>   *AK8CHSSoftDropJetMass;
 vector<float>   *AK8JetpfBoostedDSVBTag;
 vector<float>   *AK8JetJECUnc;
-vector<int>     *AK8JetPartonID;
-vector<int>     *AK8JetGenJetIndex;
-vector<float>   *AK8JetGenJetEn;
-vector<float>   *AK8JetGenJetPt;
-vector<float>   *AK8JetGenJetEta;
-vector<float>   *AK8JetGenJetPhi;
-vector<int>     *AK8JetGenPartonID;
-vector<float>   *AK8JetGenEn;
-vector<float>   *AK8JetGenPt;
-vector<float>   *AK8JetGenEta;
-vector<float>   *AK8JetGenPhi;
-vector<int>     *AK8JetGenPartonMomID;
 vector<int>     *nAK8softdropSubjet;
 vector<vector<float> > *AK8softdropSubjetPt;
 vector<vector<float> > *AK8softdropSubjetEta;
@@ -439,42 +382,9 @@ TBranch        *b_HLTJet;   //!
 TBranch        *b_HLTEleMuXIsPrescaled;   //!
 TBranch        *b_HLTPhoIsPrescaled;   //!
 TBranch        *b_HLTJetIsPrescaled;   //!
-TBranch        *b_pdf;   //!
-TBranch        *b_pthat;   //!
-TBranch        *b_processID;   //!
-TBranch        *b_genWeight;   //!
-TBranch        *b_nPUInfo;   //!
-TBranch        *b_nPU;   //!
-TBranch        *b_puBX;   //!
-TBranch        *b_puTrue;   //!
-TBranch        *b_nMC;   //!
-TBranch        *b_mcPID;   //!
-TBranch        *b_mcVtx;   //!
-TBranch        *b_mcVty;   //!
-TBranch        *b_mcVtz;   //!
-TBranch        *b_mcPt;   //!
-TBranch        *b_mcMass;   //!
-TBranch        *b_mcEta;   //!
-TBranch        *b_mcPhi;   //!
-TBranch        *b_mcE;   //!
-TBranch        *b_mcEt;   //!
-TBranch        *b_mcGMomPID;   //!
-TBranch        *b_mcMomPID;   //!
-TBranch        *b_mcMomPt;   //!
-TBranch        *b_mcMomMass;   //!
-TBranch        *b_mcMomEta;   //!
-TBranch        *b_mcMomPhi;   //!
-TBranch        *b_mcIndex;   //!
-TBranch        *b_mcStatusFlag;   //!
-TBranch        *b_mcParentage;   //!
-TBranch        *b_mcStatus;   //!
-TBranch        *b_mcCalIsoDR03;   //!
-TBranch        *b_mcTrkIsoDR03;   //!
-TBranch        *b_mcCalIsoDR04;   //!
-TBranch        *b_mcTrkIsoDR04;   //!
+TBranch        *b_genWeight;  //MC Only!
+TBranch        *b_puTrue;    //MC Only!
 TBranch        *b_metFilters;   //!
-TBranch        *b_genMET;   //!
-TBranch        *b_genMETPhi;   //!
 TBranch        *b_pfMET;   //!
 TBranch        *b_pfMETPhi;   //!
 TBranch        *b_pfMETsumEt;   //!
@@ -750,18 +660,6 @@ TBranch        *b_jetArea;   //!
 TBranch        *b_jetpfCombinedInclusiveSecondaryVertexV2BJetTags;   //!
 TBranch        *b_jetJetProbabilityBJetTags;   //!
 TBranch        *b_jetpfCombinedMVABJetTags;   //!
-TBranch        *b_jetPartonID;   //!
-TBranch        *b_jetGenJetIndex;   //!
-TBranch        *b_jetGenJetEn;   //!
-TBranch        *b_jetGenJetPt;   //!
-TBranch        *b_jetGenJetEta;   //!
-TBranch        *b_jetGenJetPhi;   //!
-TBranch        *b_jetGenPartonID;   //!
-TBranch        *b_jetGenEn;   //!
-TBranch        *b_jetGenPt;   //!
-TBranch        *b_jetGenEta;   //!
-TBranch        *b_jetGenPhi;   //!
-TBranch        *b_jetGenPartonMomID;   //!
 TBranch        *b_jetPFLooseId;   //!
 TBranch        *b_jetPUidFullDiscriminant;   //!
 TBranch        *b_jetJECUnc;   //!
@@ -787,18 +685,6 @@ TBranch        *b_AK8JetPFLooseId;   //!
 TBranch        *b_AK8CHSSoftDropJetMass;   //!
 TBranch        *b_AK8JetpfBoostedDSVBTag;   //!
 TBranch        *b_AK8JetJECUnc;   //!
-TBranch        *b_AK8JetPartonID;   //!
-TBranch        *b_AK8JetGenJetIndex;   //!
-TBranch        *b_AK8JetGenJetEn;   //!
-TBranch        *b_AK8JetGenJetPt;   //!
-TBranch        *b_AK8JetGenJetEta;   //!
-TBranch        *b_AK8JetGenJetPhi;   //!
-TBranch        *b_AK8JetGenPartonID;   //!
-TBranch        *b_AK8JetGenEn;   //!
-TBranch        *b_AK8JetGenPt;   //!
-TBranch        *b_AK8JetGenEta;   //!
-TBranch        *b_AK8JetGenPhi;   //!
-TBranch        *b_AK8JetGenPartonMomID;   //!
 TBranch        *b_nAK8softdropSubjet;   //!
 TBranch        *b_AK8softdropSubjetPt;   //!
 TBranch        *b_AK8softdropSubjetEta;   //!
@@ -809,346 +695,7 @@ TBranch        *b_AK8softdropSubjetCharge;   //!
 TBranch        *b_AK8softdropSubjetFlavour;   //!
 TBranch        *b_AK8softdropSubjetCSV;   //!
 
-/*
-pdf = 0;
-nPU = 0;
-puBX = 0;
-puTrue = 0;
-mcPID = 0;
-mcVtx = 0;
-mcVty = 0;
-mcVtz = 0;
-mcPt = 0;
-mcMass = 0;
-mcEta = 0;
-mcPhi = 0;
-mcE = 0;
-mcEt = 0;
-mcGMomPID = 0;
-mcMomPID = 0;
-mcMomPt = 0;
-mcMomMass = 0;
-mcMomEta = 0;
-mcMomPhi = 0;
-mcIndex = 0;
-mcStatusFlag = 0;
-mcParentage = 0;
-mcStatus = 0;
-mcCalIsoDR03 = 0;
-mcTrkIsoDR03 = 0;
-mcCalIsoDR04 = 0;
-mcTrkIsoDR04 = 0;
-phoE = 0;
-phoEt = 0;
-phoEta = 0;
-phoPhi = 0;
-phoSCE = 0;
-phoSCRawE = 0;
-phoESEn = 0;
-phoESEnP1 = 0;
-phoESEnP2 = 0;
-phoSCEta = 0;
-phoSCPhi = 0;
-phoSCEtaWidth = 0;
-phoSCPhiWidth = 0;
-phoSCBrem = 0;
-phohasPixelSeed = 0;
-phoEleVeto = 0;
-phoR9 = 0;
-phoHoverE = 0;
-phoSigmaIEtaIEta = 0;
-phoSigmaIEtaIPhi = 0;
-phoSigmaIPhiIPhi = 0;
-phoE1x3 = 0;
-phoE2x2 = 0;
-phoE2x5Max = 0;
-phoE5x5 = 0;
-phoESEffSigmaRR = 0;
-phoSigmaIEtaIEtaFull5x5 = 0;
-phoSigmaIEtaIPhiFull5x5 = 0;
-phoSigmaIPhiIPhiFull5x5 = 0;
-phoE1x3Full5x5 = 0;
-phoE2x2Full5x5 = 0;
-phoE2x5MaxFull5x5 = 0;
-phoE5x5Full5x5 = 0;
-phoR9Full5x5 = 0;
-phoSeedBCE = 0;
-phoSeedBCEta = 0;
-phoPFChIso = 0;
-phoPFPhoIso = 0;
-phoPFNeuIso = 0;
-phoPFChWorstIso = 0;
-phoPFChIsoFrix1 = 0;
-phoPFChIsoFrix2 = 0;
-phoPFChIsoFrix3 = 0;
-phoPFChIsoFrix4 = 0;
-phoPFChIsoFrix5 = 0;
-phoPFChIsoFrix6 = 0;
-phoPFChIsoFrix7 = 0;
-phoPFChIsoFrix8 = 0;
-phoPFPhoIsoFrix1 = 0;
-phoPFPhoIsoFrix2 = 0;
-phoPFPhoIsoFrix3 = 0;
-phoPFPhoIsoFrix4 = 0;
-phoPFPhoIsoFrix5 = 0;
-phoPFPhoIsoFrix6 = 0;
-phoPFPhoIsoFrix7 = 0;
-phoPFPhoIsoFrix8 = 0;
-phoPFNeuIsoFrix1 = 0;
-phoPFNeuIsoFrix2 = 0;
-phoPFNeuIsoFrix3 = 0;
-phoPFNeuIsoFrix4 = 0;
-phoPFNeuIsoFrix5 = 0;
-phoPFNeuIsoFrix6 = 0;
-phoPFNeuIsoFrix7 = 0;
-phoPFNeuIsoFrix8 = 0;
-phoEcalRecHitSumEtConeDR03 = 0;
-phohcalDepth1TowerSumEtConeDR03 = 0;
-phohcalDepth2TowerSumEtConeDR03 = 0;
-phohcalTowerSumEtConeDR03 = 0;
-photrkSumPtHollowConeDR03 = 0;
-phoIDMVA = 0;
-phoFiredSingleTrgs = 0;
-phoFiredDoubleTrgs = 0;
-phoIDbit = 0;
-eleCharge = 0;
-eleChargeConsistent = 0;
-eleEn = 0;
-eleSCEn = 0;
-eleESEn = 0;
-eleESEnP1 = 0;
-eleESEnP2 = 0;
-eleD0 = 0;
-eleDz = 0;
-elePt = 0;
-eleEta = 0;
-elePhi = 0;
-eleR9 = 0;
-eleSCEta = 0;
-eleSCPhi = 0;
-eleSCRawEn = 0;
-eleSCEtaWidth = 0;
-eleSCPhiWidth = 0;
-eleHoverE = 0;
-eleEoverP = 0;
-eleEoverPout = 0;
-eleEoverPInv = 0;
-eleBrem = 0;
-eledEtaAtVtx = 0;
-eledPhiAtVtx = 0;
-eledEtaAtCalo = 0;
-eleSigmaIEtaIEta = 0;
-eleSigmaIEtaIPhi = 0;
-eleSigmaIPhiIPhi = 0;
-eleSigmaIEtaIEtaFull5x5 = 0;
-eleSigmaIPhiIPhiFull5x5 = 0;
-eleConvVeto = 0;
-eleMissHits = 0;
-eleESEffSigmaRR = 0;
-elePFChIso = 0;
-elePFPhoIso = 0;
-elePFNeuIso = 0;
-elePFPUIso = 0;
-eleIDMVANonTrg = 0;
-eleIDMVATrg = 0;
-eledEtaseedAtVtx = 0;
-eleE1x5 = 0;
-eleE2x5 = 0;
-eleE5x5 = 0;
-eleE1x5Full5x5 = 0;
-eleE2x5Full5x5 = 0;
-eleE5x5Full5x5 = 0;
-eleR9Full5x5 = 0;
-eleEcalDrivenSeed = 0;
-eleDr03EcalRecHitSumEt = 0;
-eleDr03HcalDepth1TowerSumEt = 0;
-eleDr03HcalDepth2TowerSumEt = 0;
-eleDr03HcalTowerSumEt = 0;
-eleDr03TkSumPt = 0;
-elecaloEnergy = 0;
-eleTrkdxy = 0;
-eleKFHits = 0;
-eleKFChi2 = 0;
-eleGSFPt = 0;
-eleGSFEta = 0;
-eleGSFPhi = 0;
-eleGSFCharge = 0;
-eleGSFHits = 0;
-eleGSFMissHits = 0;
-eleGSFNHitsMax = 0;
-eleGSFVtxProb = 0;
-eleGSFlxyPV = 0;
-eleGSFlxyBS = 0;
-eleBCEn = 0;
-eleBCEta = 0;
-eleBCPhi = 0;
-eleBCS25 = 0;
-eleBCS15 = 0;
-eleBCSieie = 0;
-eleBCSieip = 0;
-eleBCSipip = 0;
-eleFiredTrgs = 0;
-eleIDbit = 0;
-muPt = 0;
-muEn = 0;
-muEta = 0;
-muPhi = 0;
-muCharge = 0;
-muType = 0;
-muIsLooseID = 0;
-muIsMediumID = 0;
-muIsTightID = 0;
-muIsSoftID = 0;
-muIsHighPtID = 0;
-muD0 = 0;
-muDz = 0;
-muChi2NDF = 0;
-muInnerD0 = 0;
-muInnerDz = 0;
-muTrkLayers = 0;
-muPixelLayers = 0;
-muPixelHits = 0;
-muMuonHits = 0;
-muStations = 0;
-muTrkQuality = 0;
-muIsoTrk = 0;
-muPFChIso = 0;
-muPFPhoIso = 0;
-muPFNeuIso = 0;
-muPFPUIso = 0;
-muFiredTrgs = 0;
-muInnervalidFraction = 0;
-musegmentCompatibility = 0;
-muchi2LocalPosition = 0;
-mutrkKink = 0;
-muBestTrkPtError = 0;
-muBestTrkPt = 0;
-pfTausDiscriminationByDecayModeFinding = 0;
-pfTausDiscriminationByDecayModeFindingNewDMs = 0;
-tauByMVA5LooseElectronRejection = 0;
-tauByMVA5MediumElectronRejection = 0;
-tauByMVA5TightElectronRejection = 0;
-tauByMVA5VTightElectronRejection = 0;
-tauByLooseMuonRejection3 = 0;
-tauByTightMuonRejection3 = 0;
-tauByLooseCombinedIsolationDeltaBetaCorr3Hits = 0;
-tauByMediumCombinedIsolationDeltaBetaCorr3Hits = 0;
-tauByTightCombinedIsolationDeltaBetaCorr3Hits = 0;
-tauCombinedIsolationDeltaBetaCorrRaw3Hits = 0;
-tauByVLooseIsolationMVA3oldDMwLT = 0;
-tauByLooseIsolationMVA3oldDMwLT = 0;
-tauByMediumIsolationMVA3oldDMwLT = 0;
-tauByTightIsolationMVA3oldDMwLT = 0;
-tauByVTightIsolationMVA3oldDMwLT = 0;
-tauByVVTightIsolationMVA3oldDMwLT = 0;
-tauByIsolationMVA3oldDMwLTraw = 0;
-tauByLooseIsolationMVA3newDMwLT = 0;
-tauByVLooseIsolationMVA3newDMwLT = 0;
-tauByMediumIsolationMVA3newDMwLT = 0;
-tauByTightIsolationMVA3newDMwLT = 0;
-tauByVTightIsolationMVA3newDMwLT = 0;
-tauByVVTightIsolationMVA3newDMwLT = 0;
-tauByIsolationMVA3newDMwLTraw = 0;
-tauEta = 0;
-tauPhi = 0;
-tauPt = 0;
-tauEt = 0;
-tauCharge = 0;
-tauP = 0;
-tauPx = 0;
-tauPy = 0;
-tauPz = 0;
-tauVz = 0;
-tauEnergy = 0;
-tauMass = 0;
-tauDxy = 0;
-tauZImpact = 0;
-tauDecayMode = 0;
-tauLeadChargedHadronExists = 0;
-tauLeadChargedHadronEta = 0;
-tauLeadChargedHadronPhi = 0;
-tauLeadChargedHadronPt = 0;
-tauChargedIsoPtSum = 0;
-tauNeutralIsoPtSum = 0;
-tauPuCorrPtSum = 0;
-tauNumSignalPFChargedHadrCands = 0;
-tauNumSignalPFNeutrHadrCands = 0;
-tauNumSignalPFGammaCands = 0;
-tauNumSignalPFCands = 0;
-tauNumIsolationPFChargedHadrCands = 0;
-tauNumIsolationPFNeutrHadrCands = 0;
-tauNumIsolationPFGammaCands = 0;
-tauNumIsolationPFCands = 0;
-jetPt = 0;
-jetEn = 0;
-jetEta = 0;
-jetPhi = 0;
-jetRawPt = 0;
-jetRawEn = 0;
-jetArea = 0;
-jetpfCombinedInclusiveSecondaryVertexV2BJetTags = 0;
-jetJetProbabilityBJetTags = 0;
-jetpfCombinedMVABJetTags = 0;
-jetPartonID = 0;
-jetGenJetIndex = 0;
-jetGenJetEn = 0;
-jetGenJetPt = 0;
-jetGenJetEta = 0;
-jetGenJetPhi = 0;
-jetGenPartonID = 0;
-jetGenEn = 0;
-jetGenPt = 0;
-jetGenEta = 0;
-jetGenPhi = 0;
-jetGenPartonMomID = 0;
-jetPFLooseId = 0;
-jetPUidFullDiscriminant = 0;
-jetJECUnc = 0;
-jetFiredTrgs = 0;
-AK8JetPt = 0;
-AK8JetEn = 0;
-AK8JetRawPt = 0;
-AK8JetRawEn = 0;
-AK8JetEta = 0;
-AK8JetPhi = 0;
-AK8JetMass = 0;
-AK8Jet_tau1 = 0;
-AK8Jet_tau2 = 0;
-AK8Jet_tau3 = 0;
-AK8JetCHF = 0;
-AK8JetNHF = 0;
-AK8JetCEF = 0;
-AK8JetNEF = 0;
-AK8JetNCH = 0;
-AK8Jetnconstituents = 0;
-AK8JetPFLooseId = 0;
-AK8CHSSoftDropJetMass = 0;
-AK8JetpfBoostedDSVBTag = 0;
-AK8JetJECUnc = 0;
-AK8JetPartonID = 0;
-AK8JetGenJetIndex = 0;
-AK8JetGenJetEn = 0;
-AK8JetGenJetPt = 0;
-AK8JetGenJetEta = 0;
-AK8JetGenJetPhi = 0;
-AK8JetGenPartonID = 0;
-AK8JetGenEn = 0;
-AK8JetGenPt = 0;
-AK8JetGenEta = 0;
-AK8JetGenPhi = 0;
-AK8JetGenPartonMomID = 0;
-nAK8softdropSubjet = 0;
-AK8softdropSubjetPt = 0;
-AK8softdropSubjetEta = 0;
-AK8softdropSubjetPhi = 0;
-AK8softdropSubjetMass = 0;
-AK8softdropSubjetE = 0;
-AK8softdropSubjetCharge = 0;
-AK8softdropSubjetFlavour = 0;
-AK8softdropSubjetCSV = 0;
-*/
-
-void associateTree(TTree *tree){
+void associateTree(TTree *tree, bool isMonteCarlo = true){
    tree->SetBranchAddress("run", &run, &b_run);
    tree->SetBranchAddress("event", &event, &b_event);
    tree->SetBranchAddress("lumis", &lumis, &b_lumis);
@@ -1165,43 +712,12 @@ void associateTree(TTree *tree){
    tree->SetBranchAddress("HLTJet", &HLTJet, &b_HLTJet);
    tree->SetBranchAddress("HLTEleMuXIsPrescaled", &HLTEleMuXIsPrescaled, &b_HLTEleMuXIsPrescaled);
    tree->SetBranchAddress("HLTPhoIsPrescaled", &HLTPhoIsPrescaled, &b_HLTPhoIsPrescaled);
+   if(isMonteCarlo){
+       tree->SetBranchAddress("genWeight", &genWeight, &b_genWeight);
+       tree->SetBranchAddress("puTrue", &puTrue, &b_puTrue);
+   }
    tree->SetBranchAddress("HLTJetIsPrescaled", &HLTJetIsPrescaled, &b_HLTJetIsPrescaled);
-   tree->SetBranchAddress("pdf", &pdf, &b_pdf);
-   tree->SetBranchAddress("pthat", &pthat, &b_pthat);
-   tree->SetBranchAddress("processID", &processID, &b_processID);
-   tree->SetBranchAddress("genWeight", &genWeight, &b_genWeight);
-   tree->SetBranchAddress("nPUInfo", &nPUInfo, &b_nPUInfo);
-   tree->SetBranchAddress("nPU", &nPU, &b_nPU);
-   tree->SetBranchAddress("puBX", &puBX, &b_puBX);
-   tree->SetBranchAddress("puTrue", &puTrue, &b_puTrue);
-   tree->SetBranchAddress("nMC", &nMC, &b_nMC);
-   tree->SetBranchAddress("mcPID", &mcPID, &b_mcPID);
-   tree->SetBranchAddress("mcVtx", &mcVtx, &b_mcVtx);
-   tree->SetBranchAddress("mcVty", &mcVty, &b_mcVty);
-   tree->SetBranchAddress("mcVtz", &mcVtz, &b_mcVtz);
-   tree->SetBranchAddress("mcPt", &mcPt, &b_mcPt);
-   tree->SetBranchAddress("mcMass", &mcMass, &b_mcMass);
-   tree->SetBranchAddress("mcEta", &mcEta, &b_mcEta);
-   tree->SetBranchAddress("mcPhi", &mcPhi, &b_mcPhi);
-   tree->SetBranchAddress("mcE", &mcE, &b_mcE);
-   tree->SetBranchAddress("mcEt", &mcEt, &b_mcEt);
-   tree->SetBranchAddress("mcGMomPID", &mcGMomPID, &b_mcGMomPID);
-   tree->SetBranchAddress("mcMomPID", &mcMomPID, &b_mcMomPID);
-   tree->SetBranchAddress("mcMomPt", &mcMomPt, &b_mcMomPt);
-   tree->SetBranchAddress("mcMomMass", &mcMomMass, &b_mcMomMass);
-   tree->SetBranchAddress("mcMomEta", &mcMomEta, &b_mcMomEta);
-   tree->SetBranchAddress("mcMomPhi", &mcMomPhi, &b_mcMomPhi);
-   tree->SetBranchAddress("mcIndex", &mcIndex, &b_mcIndex);
-   tree->SetBranchAddress("mcStatusFlag", &mcStatusFlag, &b_mcStatusFlag);
-   tree->SetBranchAddress("mcParentage", &mcParentage, &b_mcParentage);
-   tree->SetBranchAddress("mcStatus", &mcStatus, &b_mcStatus);
-   tree->SetBranchAddress("mcCalIsoDR03", &mcCalIsoDR03, &b_mcCalIsoDR03);
-   tree->SetBranchAddress("mcTrkIsoDR03", &mcTrkIsoDR03, &b_mcTrkIsoDR03);
-   tree->SetBranchAddress("mcCalIsoDR04", &mcCalIsoDR04, &b_mcCalIsoDR04);
-   tree->SetBranchAddress("mcTrkIsoDR04", &mcTrkIsoDR04, &b_mcTrkIsoDR04);
    tree->SetBranchAddress("metFilters", &metFilters, &b_metFilters);
-   tree->SetBranchAddress("genMET", &genMET, &b_genMET);
-   tree->SetBranchAddress("genMETPhi", &genMETPhi, &b_genMETPhi);
    tree->SetBranchAddress("pfMET", &pfMET, &b_pfMET);
    tree->SetBranchAddress("pfMETPhi", &pfMETPhi, &b_pfMETPhi);
    tree->SetBranchAddress("pfMETsumEt", &pfMETsumEt, &b_pfMETsumEt);
@@ -1477,18 +993,6 @@ void associateTree(TTree *tree){
    tree->SetBranchAddress("jetpfCombinedInclusiveSecondaryVertexV2BJetTags", &jetpfCombinedInclusiveSecondaryVertexV2BJetTags, &b_jetpfCombinedInclusiveSecondaryVertexV2BJetTags);
    tree->SetBranchAddress("jetJetProbabilityBJetTags", &jetJetProbabilityBJetTags, &b_jetJetProbabilityBJetTags);
    tree->SetBranchAddress("jetpfCombinedMVABJetTags", &jetpfCombinedMVABJetTags, &b_jetpfCombinedMVABJetTags);
-   tree->SetBranchAddress("jetPartonID", &jetPartonID, &b_jetPartonID);
-   tree->SetBranchAddress("jetGenJetIndex", &jetGenJetIndex, &b_jetGenJetIndex);
-   tree->SetBranchAddress("jetGenJetEn", &jetGenJetEn, &b_jetGenJetEn);
-   tree->SetBranchAddress("jetGenJetPt", &jetGenJetPt, &b_jetGenJetPt);
-   tree->SetBranchAddress("jetGenJetEta", &jetGenJetEta, &b_jetGenJetEta);
-   tree->SetBranchAddress("jetGenJetPhi", &jetGenJetPhi, &b_jetGenJetPhi);
-   tree->SetBranchAddress("jetGenPartonID", &jetGenPartonID, &b_jetGenPartonID);
-   tree->SetBranchAddress("jetGenEn", &jetGenEn, &b_jetGenEn);
-   tree->SetBranchAddress("jetGenPt", &jetGenPt, &b_jetGenPt);
-   tree->SetBranchAddress("jetGenEta", &jetGenEta, &b_jetGenEta);
-   tree->SetBranchAddress("jetGenPhi", &jetGenPhi, &b_jetGenPhi);
-   tree->SetBranchAddress("jetGenPartonMomID", &jetGenPartonMomID, &b_jetGenPartonMomID);
    tree->SetBranchAddress("jetPFLooseId", &jetPFLooseId, &b_jetPFLooseId);
    tree->SetBranchAddress("jetPUidFullDiscriminant", &jetPUidFullDiscriminant, &b_jetPUidFullDiscriminant);
    tree->SetBranchAddress("jetJECUnc", &jetJECUnc, &b_jetJECUnc);
@@ -1514,18 +1018,6 @@ void associateTree(TTree *tree){
    tree->SetBranchAddress("AK8CHSSoftDropJetMass", &AK8CHSSoftDropJetMass, &b_AK8CHSSoftDropJetMass);
    tree->SetBranchAddress("AK8JetpfBoostedDSVBTag", &AK8JetpfBoostedDSVBTag, &b_AK8JetpfBoostedDSVBTag);
    tree->SetBranchAddress("AK8JetJECUnc", &AK8JetJECUnc, &b_AK8JetJECUnc);
-   tree->SetBranchAddress("AK8JetPartonID", &AK8JetPartonID, &b_AK8JetPartonID);
-   tree->SetBranchAddress("AK8JetGenJetIndex", &AK8JetGenJetIndex, &b_AK8JetGenJetIndex);
-   tree->SetBranchAddress("AK8JetGenJetEn", &AK8JetGenJetEn, &b_AK8JetGenJetEn);
-   tree->SetBranchAddress("AK8JetGenJetPt", &AK8JetGenJetPt, &b_AK8JetGenJetPt);
-   tree->SetBranchAddress("AK8JetGenJetEta", &AK8JetGenJetEta, &b_AK8JetGenJetEta);
-   tree->SetBranchAddress("AK8JetGenJetPhi", &AK8JetGenJetPhi, &b_AK8JetGenJetPhi);
-   tree->SetBranchAddress("AK8JetGenPartonID", &AK8JetGenPartonID, &b_AK8JetGenPartonID);
-   tree->SetBranchAddress("AK8JetGenEn", &AK8JetGenEn, &b_AK8JetGenEn);
-   tree->SetBranchAddress("AK8JetGenPt", &AK8JetGenPt, &b_AK8JetGenPt);
-   tree->SetBranchAddress("AK8JetGenEta", &AK8JetGenEta, &b_AK8JetGenEta);
-   tree->SetBranchAddress("AK8JetGenPhi", &AK8JetGenPhi, &b_AK8JetGenPhi);
-   tree->SetBranchAddress("AK8JetGenPartonMomID", &AK8JetGenPartonMomID, &b_AK8JetGenPartonMomID);
    tree->SetBranchAddress("nAK8softdropSubjet", &nAK8softdropSubjet, &b_nAK8softdropSubjet);
    tree->SetBranchAddress("AK8softdropSubjetPt", &AK8softdropSubjetPt, &b_AK8softdropSubjetPt);
    tree->SetBranchAddress("AK8softdropSubjetEta", &AK8softdropSubjetEta, &b_AK8softdropSubjetEta);
@@ -1536,9 +1028,6 @@ void associateTree(TTree *tree){
    tree->SetBranchAddress("AK8softdropSubjetFlavour", &AK8softdropSubjetFlavour, &b_AK8softdropSubjetFlavour);
    tree->SetBranchAddress("AK8softdropSubjetCSV", &AK8softdropSubjetCSV, &b_AK8softdropSubjetCSV);
 }
-
-
-
 
 #endif	/* TREE_READER_H */
 
