@@ -1,8 +1,8 @@
 # Code written by:  zaixing.mao@cern.ch && edward.laird@cern.ch from Brown U.
 #!/usr/bin/env python
 import ROOT as r
-import numpy
 import math
+import numpy
 from sys import argv, exit, stdout, stderr
 
 if len(argv) < 2:
@@ -94,7 +94,7 @@ def buildLegendDict(histDict, position, XS_OST):
     return legendDict
 
 
-def xs_calculator(fileList = [], mass_low = 25, mass_high = 125, nbins = 50):
+def xs_calculator(fileList = [], mass_low = 25, mass_high = 125, nbins = 15):
 
     #print 'Estimating Z->ll xs in visible mass region (%.1f, %.1f)' %(mass_low, mass_high)
 
@@ -104,7 +104,7 @@ def xs_calculator(fileList = [], mass_low = 25, mass_high = 125, nbins = 50):
     DY_SST = 0.0
 
 
-    QCD_SS_to_OS_SF = 1.06
+    QCD_SS_to_OS_SF = 0.84
 
     histDict = buildHistDict(nbins)
     #loop over all the samples
@@ -121,17 +121,17 @@ def xs_calculator(fileList = [], mass_low = 25, mass_high = 125, nbins = 50):
         if isData:
             weight = 1.0
 
-        lowBin, highBin = getBins(ifile.Get('visibleMassOS'), mass_low, mass_high)
-        FillHisto(ifile.Get('visibleMassOS'), histDict[iFileName+'_OST'])
+        lowBin, highBin = getBins(ifile.Get('Mt_h'), mass_low, mass_high)
+        FillHisto(ifile.Get('Mt_h'), histDict[iFileName+'_OST'])
 
-        if not (isDY):
-            ZTT_OST += weight*ifile.Get('visibleMassOS').Integral(lowBin, highBin)
-            QCD_SST += weight*ifile.Get('visibleMassSS').Integral(lowBin, highBin)
-            FillHisto(ifile.Get('visibleMassSS'), histDict['QCD_OST'],weight)
+        if not isDY:
+            ZTT_OST += weight*ifile.Get('Mt_h').Integral(lowBin, highBin) 
+            QCD_SST += weight*ifile.Get('Mt_hSS').Integral(lowBin, highBin)
+            FillHisto(ifile.Get('Mt_hSS'), histDict['QCD_OST'], weight)
 
         else:
-            FillHisto(ifile.Get('visibleMassSS'), histDict['DY_SST'])
-            DY_OST += ifile.Get('visibleMassOS').Integral(lowBin, highBin)
+            FillHisto(ifile.Get('Mt_hSS'), histDict['DY_SST'])
+            DY_OST += ifile.Get('Mt_h').Integral(lowBin, highBin)
 
 
     lowBin, highBin = getBins(histDict['DY_SST'], mass_low, mass_high)
@@ -147,11 +147,11 @@ def xs_calculator(fileList = [], mass_low = 25, mass_high = 125, nbins = 50):
         histDict['data_OST'].SetBinError(i+1, math.sqrt(abs(histDict['data_OST'].GetBinContent(i+1))))
 
     #plot
-    pdf = 'xs.pdf'
+    pdf = 'stack_mt.pdf'
     c = r.TCanvas("c","Test", 800, 600)
     max_t = 1.2*max(stackDict['OST'].GetMaximum(), histDict['data_OST'].GetMaximum())
     stackDict['OST'].Draw('hist H')
-    stackDict['OST'].SetTitle('OS Tight Tau Iso; visibleMass; events')
+    stackDict['OST'].SetTitle(' ; M_{T}(e #slash{p}_{T}) [GeV]; events')
     stackDict['OST'].SetMaximum(max_t)
     stackDict['OST'].GetYaxis().SetTitleOffset(1.2)
     histDict['data_OST'].Draw('same PE')
@@ -162,6 +162,30 @@ def xs_calculator(fileList = [], mass_low = 25, mass_high = 125, nbins = 50):
     print 'QCD Expected: %0.2f' %(histDict['QCD_OST'].Integral(lowBin,highBin))
     legendDict['T'].Draw('same')
     c.SaveAs('%s' %pdf)
+
+    opticut_h = r.TH1F('opticut_h', 'opticut_h', nbins, 0, 300)
+    BgMC_h = histDict['TTJets_OST']
+    BgMC_h.Add(histDict['WJets_OST'])
+    BgMC_h.Add(histDict['QCD_OST'])
+    DY_h = histDict['DY_OST']
+    BgMC_h.Draw()
+    c.SaveAs('BgMC_h.pdf')
+    DY_h.Draw()
+    c.SaveAs('DY_h.pdf')
+    max_r = 0.0
+    max_i = -1
+    for i in range(DY_h.GetNbinsX()):
+        DY_I = DY_h.Integral(0,i+1)
+        BgMC_I = BgMC_h.Integral(0,i+1)
+        print DY_I, BgMC_I
+        opticut_h.SetBinContent(i+1,DY_I/math.sqrt(DY_I+BgMC_I))
+        if max_r < DY_I/math.sqrt(DY_I+BgMC_I):
+            max_r = DY_I/math.sqrt(DY_I+BgMC_I)
+            max_i = i+1
+    print 'Mt Cut: %f' % (opticut_h.GetBinCenter(max_i)+10.0)
+    opticut_h.Draw()
+    c.SaveAs('opticut.pdf')
+    
     f.Write()
     f.Close()
 
@@ -176,4 +200,4 @@ fileList = [('DY', '%s/DYJetsToLL.root' %dirName),
             ('data', '%s/SingleEle.root' %dirName)
             ]
 
-xs_calculator(fileList = fileList, mass_low = 25, mass_high = 125, nbins = 50)
+xs_calculator(fileList = fileList, mass_low = 25, mass_high = 125, nbins = 15)
