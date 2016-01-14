@@ -29,6 +29,9 @@ int main(int argc, char** argv) {
     TH1F * Mt_h = new TH1F ("Mt_h","Mt_h", 300, 0, 300);
     TH1F * Mt_hSS = new TH1F ("Mt_hSS","Mt_hSS", 300, 0, 300);
     TH1F * tauPt_h = new TH1F ("tauPt_h","tauPt_h", 300, 0, 300);
+    TH1F * tauPt_hSS = new TH1F ("tauPt_hSS","tauPt_hSS", 300, 0, 300);
+    TH1F * elePt_h = new TH1F ("elePt_h","elePt_h", 300, 0, 300);
+    TH1F * elePt_hSS = new TH1F ("elePt_hSS","elePt_hSS", 300, 0, 300);
     TH1F * tauEta_h = new TH1F ("tauEta_h","tauEta_h", 100, -2.5, 2.5);
     TH1F * tauZI_h = new TH1F ("tauZI_h","tauZI_h", 200, -100.0, 100.0);
     TH1F * NPV_h = new TH1F ("NPV_h","NPV_h", 50, 0, 50);
@@ -80,18 +83,22 @@ int main(int argc, char** argv) {
                 tauPhi->at(tauI), tauEnergy->at(tauI));
         float MT = TMass_F(ele4Vector.Pt(),ele4Vector.Px(),ele4Vector.Py(),pfMET,pfMETPhi); 
 
+        if(MT > 60.0) continue;
         
 
         if(tauCharge->at(tauI)*eleCharge->at(eleI) < 0){
             visibleMassOS->Fill((ele4Vector+tau4Vector).M(),lumiW*PUWeight*genWeight); 
             Mt_h->Fill(MT,lumiW*PUWeight*genWeight);       
             tauPt_h->Fill(tauPt->at(tauI),lumiW*PUWeight*genWeight);       
+            elePt_h->Fill(elePt->at(eleI),lumiW*PUWeight*genWeight);       
             tauEta_h->Fill(tauEta->at(tauI),lumiW*PUWeight*genWeight);      
             tauZI_h->Fill(tauZImpact->at(tauI),lumiW*PUWeight*genWeight);       
             NPV_h->Fill(nVtx,lumiW*PUWeight*genWeight); 	      
         }else{
             visibleMassSS->Fill((ele4Vector+tau4Vector).M(),lumiW*PUWeight*genWeight); 
             Mt_hSS->Fill(MT,lumiW*PUWeight*genWeight);       
+            tauPt_hSS->Fill(tauPt->at(tauI),lumiW*PUWeight*genWeight);       
+            elePt_hSS->Fill(elePt->at(eleI),lumiW*PUWeight*genWeight);       
         }
 
     }

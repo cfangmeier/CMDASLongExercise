@@ -25,19 +25,19 @@ defaultOrder = [('WJets',  r.TColor.GetColor(100,182,232)),
 def buildHistDict(nbins):
     histDict = {}
     for iSample, iColor in defaultOrder:
-        histDict[iSample+'_OST'] = r.TH1F(iSample+'_OST', '', nbins, 0, 300)
+        histDict[iSample+'_OST'] = r.TH1F(iSample+'_OST', '', nbins, 0, 200)
         histDict[iSample+'_OST'].SetFillColor(iColor)
         histDict[iSample+'_OST'].SetMarkerColor(iColor)
         histDict[iSample+'_OST'].SetMarkerStyle(21)
         histDict[iSample+'_OST'].SetLineColor(r.kBlack)
 
-    histDict['data_OST'] = r.TH1F('data_OST', '', nbins, 0, 300)
+    histDict['data_OST'] = r.TH1F('data_OST', '', nbins, 0, 200)
     histDict['data_OST'].SetMarkerStyle(8)
     histDict['data_OST'].SetMarkerSize(0.9)
     histDict['data_OST'].SetMarkerColor(r.kBlack)
 
 
-    histDict['DY_SST'] = r.TH1F('DY_SST', '', nbins, 0, 300)
+    histDict['DY_SST'] = r.TH1F('DY_SST', '', nbins, 0, 200)
     return histDict
 ################################################
 
@@ -151,9 +151,9 @@ def xs_calculator(fileList = [], mass_low = 25, mass_high = 125, nbins = 15):
     c = r.TCanvas("c","Test", 800, 600)
     max_t = 1.2*max(stackDict['OST'].GetMaximum(), histDict['data_OST'].GetMaximum())
     stackDict['OST'].Draw('hist H')
-    stackDict['OST'].SetTitle(' ; M_{T}(e #slash{p}_{T}) [GeV]; events')
+    stackDict['OST'].SetTitle(' ; M_{T}(e #slash{p}_{T}) [GeV]; Events / 20 GeV')
     stackDict['OST'].SetMaximum(max_t)
-    stackDict['OST'].GetYaxis().SetTitleOffset(1.2)
+    stackDict['OST'].GetYaxis().SetTitleOffset(1.3)
     histDict['data_OST'].Draw('same PE')
     print 'Observation: %0.2f' %(histDict['data_OST'].Integral(lowBin,highBin))
     print 'ZTT (unscaled) Expected: %0.2f' %(histDict['DY_OST'].Integral(lowBin,highBin))
@@ -163,7 +163,7 @@ def xs_calculator(fileList = [], mass_low = 25, mass_high = 125, nbins = 15):
     legendDict['T'].Draw('same')
     c.SaveAs('%s' %pdf)
 
-    opticut_h = r.TH1F('opticut_h', 'opticut_h', nbins, 0, 300)
+    opticut_h = r.TH1F('opticut_h', 'opticut_h', nbins, 0, 200)
     BgMC_h = histDict['TTJets_OST']
     BgMC_h.Add(histDict['WJets_OST'])
     BgMC_h.Add(histDict['QCD_OST'])
@@ -200,4 +200,4 @@ fileList = [('DY', '%s/DYJetsToLL.root' %dirName),
             ('data', '%s/SingleEle.root' %dirName)
             ]
 
-xs_calculator(fileList = fileList, mass_low = 25, mass_high = 125, nbins = 15)
+xs_calculator(fileList = fileList, mass_low = 25, mass_high = 125, nbins = 10)
