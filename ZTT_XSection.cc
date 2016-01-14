@@ -137,21 +137,23 @@ int main(int argc, char** argv) {
         }
 
         float PUWeight = 1;
-        int puNUmmc=int(puTrue->at(0)*10);
-        int puNUmdata=int(puTrue->at(0)*10);
-        float PUMC_=HistoPUMC->GetBinContent(puNUmmc+1);
-        float PUData_=HistoPUData->GetBinContent(puNUmdata+1);
-        PUWeight= PUData_/PUMC_;
-
+        if(lumiW != 1) 
+        {
+            int puNUmmc=int(puTrue->at(0)*10);
+            int puNUmdata=int(puTrue->at(0)*10);
+            float PUMC_=HistoPUMC->GetBinContent(puNUmmc+1);
+            float PUData_=HistoPUData->GetBinContent(puNUmdata+1);
+            PUWeight= PUData_/PUMC_;
+        }
         int eleI = electronSelection();
         int tauI = tauIsoID();
         if(tauI == -1) continue;
         if(eleI == -1) continue;
         TLorentzVector tau4Vector, ele4Vector;
         ele4Vector.SetPtEtaPhiE(elePt->at(eleI), eleEta->at(eleI),
-                                elePhi->at(eleI), eleEn->at(eleI));
+                elePhi->at(eleI), eleEn->at(eleI));
         tau4Vector.SetPtEtaPhiE(tauPt->at(tauI), tauEta->at(tauI),
-                                tauPhi->at(tauI), tauEnergy->at(tauI));
+                tauPhi->at(tauI), tauEnergy->at(tauI));
 
 
         if(tauCharge->at(tauI)*eleCharge->at(eleI) < 0){
