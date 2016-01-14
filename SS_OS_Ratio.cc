@@ -11,20 +11,6 @@
 #include <string>
 #include <ostream>
 
-//#define OS_SS_VERBOSE
-bool transverseMassOk(int eleI){
-        float MtCut = 40;
-        TLorentzVector ele4Vec;
-        ele4Vec.SetPtEtaPhiE(elePt->at(eleI), eleEta->at(eleI),
-                             elePhi->at(eleI), eleEn->at(eleI));
-        float Mt = TMass_F(ele4Vec.Pt(), ele4Vec.Px(), ele4Vec.Py(),
-                           pfMET, pfMETPhi);
-#ifdef OS_SS_VERBOSE
-        cout << "Mt: " << ((Mt < MtCut)?"PASS":"FAIL")
-             << " "    << Mt << endl;
-#endif
-        return Mt < MtCut;
-}
 
 int main(int argc, char** argv) {
     using namespace std;

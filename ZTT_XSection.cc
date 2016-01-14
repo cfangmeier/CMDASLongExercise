@@ -72,14 +72,13 @@ int main(int argc, char** argv) {
         int tauI = tauSelection();
         if(tauI == -1) continue;
         if(eleI == -1) continue;
+        if(!transverseMassOk(eleI)) continue;
         TLorentzVector tau4Vector, ele4Vector;
         ele4Vector.SetPtEtaPhiE(elePt->at(eleI), eleEta->at(eleI),
                 elePhi->at(eleI), eleEn->at(eleI));
         tau4Vector.SetPtEtaPhiE(tauPt->at(tauI), tauEta->at(tauI),
                 tauPhi->at(tauI), tauEnergy->at(tauI));
 
-        float MT = TMass_F(ele4Vector.Pt(),ele4Vector.Px(),ele4Vector.Py(),pfMET,pfMETPhi);
-        if (MT<80.0) continue;
         
 
         if(tauCharge->at(tauI)*eleCharge->at(eleI) < 0){

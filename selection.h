@@ -177,3 +177,17 @@ int tauSelection() {
     }
     return idx;
 }
+
+bool transverseMassOk(int eleI){
+        float MtCut = 60;
+        TLorentzVector ele4Vec;
+        ele4Vec.SetPtEtaPhiE(elePt->at(eleI), eleEta->at(eleI),
+                             elePhi->at(eleI), eleEn->at(eleI));
+        float Mt = TMass_F(ele4Vec.Pt(), ele4Vec.Px(), ele4Vec.Py(),
+                           pfMET, pfMETPhi);
+#ifdef SEL_VERBOSE
+        cout << "Mt: " << ((Mt < MtCut)?"PASS":"FAIL")
+             << " "    << Mt << endl;
+#endif
+        return Mt < MtCut;
+}
